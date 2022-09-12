@@ -10,10 +10,24 @@ const Header = () => {
         <div className="nav">
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink
+                to="/"
+                style={({ isActive }) => ({
+                  color: isActive ? "rgb(100, 123, 253)" : "#000",
+                })}
+              >
+                Home
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/">Favourites</NavLink>
+              <NavLink
+                to="/movieCardDetail"
+                style={({ isActive }) => ({
+                  color: isActive ? "rgb(100, 123, 253)" : "#000",
+                })}
+              >
+                Favourites
+              </NavLink>
             </li>
           </ul>
         </div>

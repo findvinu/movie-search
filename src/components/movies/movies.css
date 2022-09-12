@@ -28,6 +28,13 @@
     list-style-type: none;
 }
 
+.nav ul li a {
+    text-decoration: none;
+}
+
+.nav ul li a.active {
+    font-weight: 500;
+}
 .searchBox {
     background-color: rgb(100, 123, 253);
     padding: 1rem;

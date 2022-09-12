@@ -13,20 +13,8 @@ function App() {
         <Search />
 
         <Routes>
-          <Route
-            path="/"
-            element={<Movies />}
-            style={({ isActive }) => ({
-              color: isActive ? "greenyellow" : "white",
-            })}
-          />
-          <Route
-            path="/movieCardDetail"
-            element={<MovieCardDetail />}
-            style={({ isActive }) => ({
-              color: isActive ? "greenyellow" : "white",
-            })}
-          />
+          <Route path="/" element={<Movies />} />
+          <Route path="/movieCardDetail" element={<MovieCardDetail />} />
         </Routes>
       </BrowserRouter>
     </div>
