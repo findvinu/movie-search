@@ -1,0 +1,125 @@
+.layout {
+    max-width: 80rem;
+    margin: 0 auto;
+}
+
+.Header {
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.nav {
+    width: 100%;
+}
+
+.nav ul {
+    margin: 0;
+    padding: 1rem 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 4%);
+}
+
+.nav ul li {
+    list-style-type: none;
+}
+
+.searchBox {
+    background-color: rgb(100, 123, 253);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.searchBox input {
+    width: 20rem;
+}
+
+.searchBox * {
+    padding: 8px;
+    margin-right: 5px;
+}
+
+.movieList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 23%);
+    justify-content: space-between;
+    grid-gap: 20px;
+
+}
+
+
+.movieCard {
+    border: 1px solid rgb(100, 123, 253);
+    border-radius: .7rem;
+    margin-bottom: 1rem;
+    border-bottom: 5px solid rgb(100, 123, 253);
+    gap: 20px;
+}
+
+
+.movieCard h3~img {
+    width: 100%;
+    max-height: 23rem;
+    cursor: pointer;
+}
+
+.movieCard h3 {
+    background-color: rgb(100, 123, 253);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin: 0;
+    border-top-right-radius: .7rem;
+    border-top-left-radius: .7rem;
+    cursor: pointer;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.footer img {
+    cursor: pointer;
+}
+
+.footerText span {
+    display: block;
+}
+
+.movieDetail {
+    display: flex;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    padding: 2rem;
+}
+
+.movieDetail img {
+    margin-right: 2rem;
+    border: 1px solid #eee;
+    padding: 4px;
+}
+
+.movieDetail h3 {
+    margin: 0 0 .5rem 0;
+}
+
+.movieDetail div:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.movieDetail div span:first-child {
+    margin-right: .5rem;
+}
+
+.movieDetail div span:last-child {
+    margin-left: .5rem;
+}
