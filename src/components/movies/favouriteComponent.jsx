@@ -5,12 +5,12 @@ const FavouriteComponent = ({ Title, Poster, Year, Type }) => {
 
   useEffect(() => {
     setItem(localStorage.getItem("item", JSON.stringify(item)));
-  }, [item]);
+  }, []);
 
   return (
     <div className="FavouriteComponent">
       <div className="movieCard">
-        <h3>{Title}</h3>
+        <h3>{item.Title}</h3>
         <img src={Poster} alt={Title} />
         <div className="footer">
           <div className="footerText">
