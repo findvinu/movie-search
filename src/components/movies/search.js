@@ -1,48 +1,44 @@
 import React, { useState } from "react";
-
 import "./movies.css";
 
-const Search = (props) => {
-  const [searchValue, setSearchValue] = useState("");
-  const [movieList, setMovieList] = useState("");
+const options = [
+  { label: "All", value: "All" },
+  { label: "Movies", value: "Movies" },
+  { label: "Series", value: "Series" },
+  { label: "Episode", value: "Episode" },
+];
 
-  const handleCategoryChange = (e) => {
-    setMovieList(e.target.value);
-    console.log("this is resut", e.target.value);
+const Search = ({ clickSearchHeandler }) => {
+  const [searchInput, setSearchInput] = useState("");
+  const [selectType, setSelectType] = useState("");
+
+  // search
+  const onSelectInput = (e) => {
+    setSearchInput(e.target.value);
+    console.log("setSearchInput", searchInput);
   };
-
-  const handleSearchInputChanges = (e) => {
-    setSearchValue(e.target.value);
-  };
-
-  const resetInputFields = (e) => {
-    setSearchValue("");
-  };
-
-  const onSearchClickHandler = (e) => {
-    e.preventDefault();
-    props.search(searchValue);
-    setSearchValue(e.target.value);
-    resetInputFields();
-    console.log(props.search(searchValue));
+  const onSelectDropDown = (e) => {
+    setSelectType(e.target.value);
+    console.log("setSelectType", selectType);
   };
 
   return (
     <div className="searchBox">
       <div className="searchBoxInn">
         <input
+          value={searchInput}
+          onChange={onSelectInput}
           type="text"
           placeholder="Search..."
-          value={props.value}
-          onChange={handleSearchInputChanges}
         />
-        <select onChange={handleCategoryChange}>
-          <option value="All">All</option>
-          <option value="Movies">Movies</option>
-          <option value="Series">Series</option>
-          <option value="Episode">Episode</option>
+        <select value={selectType} onChange={onSelectDropDown}>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
-        <button type="search" onClick={(e) => onSearchClickHandler}>
+        <button type="search" onClick={clickSearchHeandler}>
           Search
         </button>
       </div>

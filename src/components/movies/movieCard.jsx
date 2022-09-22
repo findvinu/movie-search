@@ -1,43 +1,24 @@
 import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import "./movies.css";
 
-const MovieCard = ({ Title, Poster, Year, Type, onClick, imdbID }) => {
-  const navigate = useNavigate();
-  const [item, setItem] = useState([]);
-  const [isActive, setIsActive] = useState(false);
-
-  const getMovieDetails = () => {
-    navigate(`movieCardDetail/${imdbID}`);
-  };
-
-  const setFavMovie = (e) => {
-    setItem(
-      item.push({
-        title: Title,
-        poster: Poster,
-        year: Year,
-        type: Year,
-      })
-    );
-
-    setIsActive(!isActive);
-
-    localStorage.setItem("item", JSON.stringify(item));
-  };
+const MovieCard = ({ movieList, getMovieDetails, setFavMovie, isActive }) => {
+  // const navigate = useNavigate();
 
   return (
     <div className="movieCard">
-      <h3 onClick={getMovieDetails}>{Title}</h3>
-      <img src={Poster} alt={Title} onClick={getMovieDetails} />
+      <h3 onClick={getMovieDetails}>{movieList.Title}</h3>
+      <img
+        src={movieList.Poster}
+        alt={movieList.Title}
+        onClick={getMovieDetails}
+      />
       <div className={`footer ${isActive ? "active" : ""}`}>
         <div className="footerText">
-          <span>Year: {Year}</span>
-          <span>Type: {Type}</span>
+          <span>Year: {movieList.Year}</span>
+          <span>Type: {movieList.Type}</span>
         </div>
-
+        {/*  {movieList.imdbID} */}
         <img
           className="favImg"
           height="24px"
