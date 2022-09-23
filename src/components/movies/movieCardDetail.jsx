@@ -1,49 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-
 import "./movies.css";
 
-const MovieCardDetail = ({
-  Poster,
-  Title,
-  Type,
-  Plot,
-  Language,
-  Released,
-  Ratings,
-  Rated,
-  Genre,
-  Actors,
-  Director,
-  Writer,
-}) => {
-  const [response, setResponse] = useState([]);
-  const { movieId } = useParams();
-  const [loading, setLoading] = useState(true);
-  /* console.log("params", movieId); */
-
-  const getMovieDetails = () => {
-    axios
-      .get(`https://www.omdbapi.com/?apikey=eb1ef3fc&i=${movieId}`)
-      .then((response) => {
-        setResponse(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  };
-
-  useEffect(() => {
-    getMovieDetails();
-  }, [movieId]);
-
-  /* console.log("response", response); */
-
+const MovieCardDetail = ({ response, getMovieDetails, isLoading }) => {
   return (
     <div className="movieDetail">
-      {loading ? (
+      {console.log("response", response)}
+      {!isLoading ? (
         <div className="loaderImage">
           <img
             src="https://icons8.com/preloaders/preloaders/5/Filled%20fading%20balls.gif"

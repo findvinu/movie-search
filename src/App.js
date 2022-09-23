@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 
 import Header from "./components/movies/header";
 import Search from "./components/movies/search";
@@ -12,8 +12,12 @@ function App({ imdbID }) {
   const [movieList, setMovieList] = useState([]);
   const [item, setItem] = useState([]);
   const [isActive, setIsActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState([]);
+  const [response, setResponse] = useState([]);
+  const { movieId } = useParams();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const getMovieList = () => {
     axios
@@ -21,20 +25,29 @@ function App({ imdbID }) {
       .then((response) => {
         const movieData = response.data.Search;
         setMovieList(movieData);
+        setIsLoading(true);
       })
       .catch((error) => {
-        console.log("error", error);
+        setIsLoading(true);
+        setError(error);
       });
   };
 
-  useEffect(() => {
-    getMovieList();
-  }, []);
-
   // get movie card details
-  const getMovieDetails = () => {
+  const getMovieDetails = (movieId) => {
     //  navigate(`movieCardDetail/${imdbID}`);
-    console.log("clicked getMovieDetails", movieList);
+    navigate("/movieCardDetail/:movieId");
+    axios
+      // .get(`https://www.omdbapi.com/?apikey=eb1ef3fc&i=tt1285016`)
+      .get(`https://www.omdbapi.com/?apikey=eb1ef3fc&i=${imdbID}`)
+      .then((response) => {
+        setResponse(response.data);
+        setIsLoading(true);
+        console.log("abc", response.data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
   };
 
   // save localhost
@@ -48,7 +61,7 @@ function App({ imdbID }) {
   const clickSearchHeandler = (e) => {
     e.preventDefault();
     axios
-      .get(`https://www.omdbapi.com/?apikey=eb1ef3fc&s=com&type=&i${imdbID}`)
+      .get(`http://www.omdbapi.com/?apikey=eb1ef3fc&s=com&type=&i=${imdbID}`)
       .then((response) => {
         response = response.data;
       })
@@ -57,36 +70,45 @@ function App({ imdbID }) {
     console.log("clicked clickSearchHeandler");
   };
 
+  useEffect(() => {
+    getMovieList();
+  }, []);
+
   return (
     <div className="layout">
-      <BrowserRouter>
-        <Header />
-        <Search clickSearchHeandler={clickSearchHeandler} />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <MoviesCardList
-                movieList={movieList}
-                getMovieDetails={getMovieDetails}
-                setFavMovie={setFavMovie}
+      <Header />
+      <Search clickSearchHeandler={clickSearchHeandler} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <MoviesCardList
+              movieList={movieList}
+              getMovieDetails={getMovieDetails}
+              /*  setFavMovie={setFavMovie}
                 isActive={isActive}
-              />
-            }
-            exact
-          />
-          <Route
-            exact
-            path="/movieCardDetail/:movieId"
-            element={<MovieCardDetail />}
-          />
-          <Route
-            exact
-            path="/favouriteComponent"
-            element={<FavouriteComponent />}
-          />
-        </Routes>
-      </BrowserRouter>
+                response={response} */
+            />
+          }
+          exact
+        />
+        <Route
+          exact
+          path={`/movieCardDetail/:movieId`}
+          element={
+            <MovieCardDetail
+              getMovieDetails={getMovieDetails}
+              isLoading={isLoading}
+              response={response}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/favouriteComponent"
+          element={<FavouriteComponent />}
+        />
+      </Routes>
     </div>
   );
 }

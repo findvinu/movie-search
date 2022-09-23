@@ -2,6 +2,7 @@ import React from "react";
 
 import MovieCard from "./movieCard";
 
+
 import "./movies.css";
 
 const MovieCardList = ({
@@ -9,6 +10,7 @@ const MovieCardList = ({
   getMovieDetails,
   setFavMovie,
   isActive,
+  response,
 }) => {
   return (
     <div className="movieLayout">
@@ -22,6 +24,7 @@ const MovieCardList = ({
                 getMovieDetails={getMovieDetails}
                 setFavMovie={setFavMovie}
                 isActive={isActive}
+                response={response}
               />
             );
           })}

@@ -21,7 +21,7 @@ const Header = () => {
             </li>
             <li>
               <NavLink
-                to="/favouriteComponent"
+                to="/movieCardDetail"
                 style={({ isActive }) => ({
                   color: isActive ? "rgb(100, 123, 253)" : "#000",
                 })}

@@ -18,7 +18,6 @@ const MovieCard = ({ movieList, getMovieDetails, setFavMovie, isActive }) => {
           <span>Year: {movieList.Year}</span>
           <span>Type: {movieList.Type}</span>
         </div>
-        {/*  {movieList.imdbID} */}
         <img
           className="favImg"
           height="24px"
