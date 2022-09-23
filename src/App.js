@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate, useParams } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import Header from "./components/movies/header";
 import Search from "./components/movies/search";
@@ -15,7 +15,6 @@ function App({ imdbID }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState([]);
   const [response, setResponse] = useState([]);
-  const { movieId } = useParams();
 
   const navigate = useNavigate();
 
@@ -34,9 +33,8 @@ function App({ imdbID }) {
   };
 
   // get movie card details
-  const getMovieDetails = (movieId) => {
-    //  navigate(`movieCardDetail/${imdbID}`);
-    navigate("/movieCardDetail/:movieId");
+  const getMovieDetails = () => {
+    navigate(`movieCardDetail/${imdbID}`);
     axios
       // .get(`https://www.omdbapi.com/?apikey=eb1ef3fc&i=tt1285016`)
       .get(`https://www.omdbapi.com/?apikey=eb1ef3fc&i=${imdbID}`)

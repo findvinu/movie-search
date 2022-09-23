@@ -11,6 +11,7 @@ const MovieCardList = ({
   setFavMovie,
   isActive,
   response,
+  movieId,
 }) => {
   return (
     <div className="movieLayout">
@@ -25,6 +26,7 @@ const MovieCardList = ({
                 setFavMovie={setFavMovie}
                 isActive={isActive}
                 response={response}
+                movieId={movieId}
               />
             );
           })}

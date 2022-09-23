@@ -1,9 +1,12 @@
+import React from "react";
+
 import "./movies.css";
 
 const MovieCardDetail = ({ response, getMovieDetails, isLoading }) => {
+  console.log("responseDetails", response);
+
   return (
     <div className="movieDetail">
-      {console.log("response", response)}
       {!isLoading ? (
         <div className="loaderImage">
           <img

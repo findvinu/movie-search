@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 const FavouriteComponent = ({ Title, Poster, Year, Type }) => {
   const [item, setItem] = useState([]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     setItem(localStorage.getItem("item", JSON.stringify(item)));
-  }, []);
+  }, []); */
 
   return (
     <div className="FavouriteComponent">

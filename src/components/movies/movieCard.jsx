@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import "./movies.css";
 
-const MovieCard = ({ movieList, getMovieDetails, setFavMovie, isActive }) => {
+const MovieCard = ({
+  movieList,
+  getMovieDetails,
+  setFavMovie,
+  isActive,
+  response,
+}) => {
   // const navigate = useNavigate();
+  const { movieId } = useParams();
 
   return (
     <div className="movieCard">
