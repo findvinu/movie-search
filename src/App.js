@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 
 import Header from "./components/movies/header";
 import Search from "./components/movies/search";
@@ -12,10 +12,11 @@ function App({ imdbID }) {
   const [movieList, setMovieList] = useState([]);
   const [item, setItem] = useState([]);
   const [isActive, setIsActive] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState([]);
   const [response, setResponse] = useState([]);
-
+  const { movieId } = useParams();
+  console.log("data...movieList", movieList);
   const navigate = useNavigate();
 
   const getMovieList = () => {
@@ -24,23 +25,21 @@ function App({ imdbID }) {
       .then((response) => {
         const movieData = response.data.Search;
         setMovieList(movieData);
-        setIsLoading(true);
+        setIsLoaded(true);
       })
       .catch((error) => {
-        setIsLoading(true);
+        setIsLoaded(true);
         setError(error);
       });
   };
 
   // get movie card details
-  const getMovieDetails = () => {
-    navigate(`movieCardDetail/${imdbID}`);
+  const getMovieDetails = (movieId) => {
+    //  navigate(`movieCardDetail/${imdbID}`);
     axios
-      // .get(`https://www.omdbapi.com/?apikey=eb1ef3fc&i=tt1285016`)
-      .get(`https://www.omdbapi.com/?apikey=eb1ef3fc&i=${imdbID}`)
+      .get(`https://www.omdbapi.com/?apikey=eb1ef3fc&i=tt1285016`)
       .then((response) => {
         setResponse(response.data);
-        setIsLoading(true);
         console.log("abc", response.data);
       })
       .catch((error) => {
@@ -56,12 +55,14 @@ function App({ imdbID }) {
     localStorage.setItem("item", JSON.stringify(item));
   };
 
-  const clickSearchHeandler = (e) => {
-    e.preventDefault();
+  const clickSearchHeandler = (str) => {
+    // e.preventDefault();
     axios
-      .get(`http://www.omdbapi.com/?apikey=eb1ef3fc&s=com&type=&i=${imdbID}`)
+      .get(`http://www.omdbapi.com/?apikey=eb1ef3fc&s=${str}&type=`)
       .then((response) => {
-        response = response.data;
+        console.log("data...response.data", response.data.Search);
+        response = response.data.Search;
+        setMovieList(response);
       })
       .catch((error) => error);
 
@@ -96,7 +97,6 @@ function App({ imdbID }) {
           element={
             <MovieCardDetail
               getMovieDetails={getMovieDetails}
-              isLoading={isLoading}
               response={response}
             />
           }

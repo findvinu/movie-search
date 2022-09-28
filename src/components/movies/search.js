@@ -38,7 +38,7 @@ const Search = ({ clickSearchHeandler }) => {
             </option>
           ))}
         </select>
-        <button type="search" onClick={clickSearchHeandler}>
+        <button type="button" onClick={() => clickSearchHeandler(searchInput)}>
           Search
         </button>
       </div>

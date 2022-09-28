@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./movies.css";
 
@@ -11,11 +11,15 @@ const MovieCard = ({
   response,
 }) => {
   // const navigate = useNavigate();
-  const { movieId } = useParams();
+  let navigate = useNavigate();
+  const detailsPage = (imdbID) => {
+    navigate(`/movieCardDetail/:${imdbID}`);
+  };
 
   return (
     <div className="movieCard">
-      <h3 onClick={getMovieDetails}>{movieList.Title}</h3>
+      <h3 onClick={() => detailsPage(movieList.imdbID)}>{movieList.Title}</h3>
+      {console.log("data...movieList", movieList)}
       <img
         src={movieList.Poster}
         alt={movieList.Title}
