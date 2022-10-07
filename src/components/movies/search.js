@@ -1,46 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+
 import "./movies.css";
 
-const options = [
-  { label: "All", value: "All" },
-  { label: "Movies", value: "Movies" },
-  { label: "Series", value: "Series" },
-  { label: "Episode", value: "Episode" },
-];
-
-const Search = ({ clickSearchHeandler }) => {
-  const [searchInput, setSearchInput] = useState("");
-  const [selectType, setSelectType] = useState("");
-
-  // search
-  const onSelectInput = (e) => {
-    setSearchInput(e.target.value);
-    console.log("setSearchInput", searchInput);
-  };
-  const onSelectDropDown = (e) => {
-    setSelectType(e.target.value);
-    console.log("setSelectType", selectType);
-  };
-
+const Search = () => {
   return (
     <div className="searchBox">
       <div className="searchBoxInn">
-        <input
-          value={searchInput}
-          onChange={onSelectInput}
-          type="text"
-          placeholder="Search..."
-        />
-        <select value={selectType} onChange={onSelectDropDown}>
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
+        <input type="text" placeholder="Search..." />
+        <select>
+          <option value="All">All</option>
+          <option value="Movies">Movies</option>
+          <option value="Series">Series</option>
+          <option value="Episode">Episode</option>
         </select>
-        <button type="button" onClick={() => clickSearchHeandler(searchInput)}>
-          Search
-        </button>
+        <button type="search">Search</button>
       </div>
     </div>
   );

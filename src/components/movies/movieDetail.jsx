@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 import "./movies.css";
 
-const MovieCardDetail = ({ response, getMovieDetails, isLoading }) => {
-  console.log("responseDetails", response);
+const MovieDetail = ({ isLoading, response }) => {
+  /*   const getMovieDetail = (IMDb) => {
+    axios
+      .get(`https://www.omdbapi.com/?apikey=eb1ef3fc&i${IMDb}`)
+      .then(() => {
+        const result = response.data;
+        setResponse(result);
+        console.log("response", result);
+      })
+      .error((error) => {
+        console.log("error", error);
+      });
+  }; */
+
+  console.log("movieList-MovieDetals", response);
 
   return (
     <div className="movieDetail">
-      {!isLoading ? (
+      {isLoading ? (
         <div className="loaderImage">
           <img
             src="https://icons8.com/preloaders/preloaders/5/Filled%20fading%20balls.gif"
@@ -33,7 +47,6 @@ const MovieCardDetail = ({ response, getMovieDetails, isLoading }) => {
             <div>
               <span>
                 <b>Ratings :</b>
-                {/* {response?.Ratings} */}
               </span>
               |
               <span>
@@ -59,4 +72,4 @@ const MovieCardDetail = ({ response, getMovieDetails, isLoading }) => {
   );
 };
 
-export default MovieCardDetail;
+export default MovieDetail;
